@@ -1,4 +1,5 @@
 type Query {
+  # Description of the site
   info: String
   feed: [Link!]!
 }
