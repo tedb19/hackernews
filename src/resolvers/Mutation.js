@@ -40,8 +40,26 @@ const login = async (parent, args, ctx, info) => {
   }
 }
 
+const vote = async (parent, args, ctx, info) => {
+  const userId = getUserId(ctx)
+  const voteExists = await ctx.prisma.$exists.vote({
+    link: { id: args.linkId },
+    user: { id: userId }
+  })
+
+  if (voteExists) {
+    throw new Error(`You already voted for link ${args.linkId}`)
+  }
+
+  return ctx.prisma.createVote({
+    link: { connect: { id: args.linkId } },
+    user: { connect: { id: userId } }
+  })
+}
+
 module.exports = {
   post,
   signup,
-  login
+  login,
+  vote
 }
