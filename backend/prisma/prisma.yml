@@ -1,6 +1,5 @@
 # the http endpoint for your prisma API
-#endpoint: ""
-endpoint: http://localhost:4466
+endpoint: http://localhost:4466/hackernews/dev
 
 # points to the file that contains the data model
 datamodel: datamodel.prisma
@@ -9,3 +8,5 @@ datamodel: datamodel.prisma
 generate:
   - generator: javascript-client
     output: ../src/generated/prisma-client
+  - generator: graphql-schema # for the schema imports
+    output: ../src/generated/prisma.graphql

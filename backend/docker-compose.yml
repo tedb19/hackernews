@@ -6,7 +6,6 @@ services:
     ports:
       - '4466:4466'
     environment:
-      LOG_LEVEL: DEBUG
       PRISMA_CONFIG: |
         port: 4466
         databases:
