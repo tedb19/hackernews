@@ -1,6 +1,8 @@
+# import * from "./generated/prisma.graphql"
+
 type Query {
   info: String
-  feed(filter: String): [Link!]!
+  feed(filter: String, first: Int, skip: Int, orderBy: LinkOrderByInput): Feed!
   votes: [Vote!]!
 }
 
@@ -16,23 +18,14 @@ type Subscription {
   newVote: Vote
 }
 
-type Vote {
-  id: ID!
-  link: Link!
-  user: User!
-}
-
-type Link {
-  id: ID!
-  description: String!
-  url: String!
-  postedBy: User
-  votes: [Vote!]!
-}
-
 type AuthPayload {
   token: String
   user: User
+}
+
+type Feed {
+  links: [Link!]!
+  count: Int!
 }
 
 type User {
